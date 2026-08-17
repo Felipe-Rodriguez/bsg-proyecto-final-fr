@@ -25,25 +25,27 @@ El pipeline sigue la **Arquitectura Medallion (Bronze -> Silver -> Gold)**, cons
 1. Clonar repositorio y configurar variables en `.env`.
 2. Crear carpeta `landing` en bucket y subir el archivo: `Walmart.csv`
 3. Instalar dependencias: `make install`
-4. Ejecutar tests: `make test`
-5. Correr pipeline: `make run-hybrid`
+4. Cargar csv a Mongodb: `make ingest-mongodb`
+5. Ejecutar tests: `make test`
+6. Correr pipeline: `make run-hybrid`
 
 ### En Airflow (Nube):
 1. Clonar repositorio y configurar variables en `.env`.
 2. Crear carpeta `landing` en bucket y subir el archivo: `Walmart.csv`
 3. Instalar dependencias: `make install`
-4. Ejecutar tests: `make test`
-5. Instalar airflow: `make airflow-install`
-6. Inicializar BD: `make airflow-init`
-7. Crear usuario: airflow users create --username admin --firstname Nombre(s) --lastname Apellido(s) --role Admin --email email@ejemplo.com --password admin123
-8. Iniciar Airflow: `make airflow-run`
-9. Acceder a: `http://localhost:8081/`
-10. Buscar y ejecutar DAG: `walmart_etl_dag`
+4. Cargar csv a Mongodb: `make ingest-mongodb`
+5. Ejecutar tests: `make test`
+6. Instalar airflow: `make airflow-install`
+7. Inicializar BD: `make airflow-init`
+8. Crear usuario: airflow users create --username admin --firstname Nombre(s) --lastname Apellido(s) --role Admin --email email@ejemplo.com --password admin123
+9. Iniciar Airflow: `make airflow-run`
+10. Acceder a: `http://localhost:8081/`
+11. Buscar y ejecutar DAG: `walmart_etl_dag`
 
 ## 4. Estructura de Datos
 * **Bronze:** `bronze/walmart_sales/` y `bronze/holidays_api/` (datos raw en Parquet).
 * **Silver:** `silver/walmart_sales_curated/` (datos limpios, tipados y cruzados).
-* **Gold:** Tabla BigQuery `holiday_sales_impact` (métricas agregadas por tienda, año y festividad).
+* **Gold:** `gold/bsg_walmart/` y Tabla BigQuery `holiday_sales_impact` (métricas agregadas por tienda, año y festividad).
 
 ## 5. Decisiones Clave
 * **Formato Parquet:** La compresión de estos archivos es eficiente y de bajo peso comparado con csv y, además, cuenta con tipado nativo columnar.

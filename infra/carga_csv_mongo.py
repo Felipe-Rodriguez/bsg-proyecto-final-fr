@@ -8,7 +8,7 @@ load_dotenv()
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
 DB_NAME = os.getenv("MONGO_DB", "walmart_db")
 COLLECTION_NAME = os.getenv("MONGO_COLLECTION", "ventas_raw")
-CSV_PATH = "./data_samples/Walmart.csv"
+CSV_PATH = os.getenv("INPUT_FILE_PATH_MONGODB", "./data_samples/Walmart.csv")
 
 def carga_csv_db():
     print(f"Leyendo dataset desde {CSV_PATH}...")

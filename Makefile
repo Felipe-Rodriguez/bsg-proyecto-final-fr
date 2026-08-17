@@ -9,6 +9,9 @@ install:
 test:
 	. .venv/bin/activate && PYTHONPATH=. pytest -q
 
+ingest-mongodb:
+	. .venv/bin/activate && PYTHONPATH=. python -m infra.carga_csv_mongo
+
 run-local:
 	. .venv/bin/activate && PYTHONPATH=. python -m src.pipeline.main --mode local
 
