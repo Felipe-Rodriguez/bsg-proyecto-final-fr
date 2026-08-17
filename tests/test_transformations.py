@@ -17,10 +17,7 @@ gold_sch_path = os.getenv("GOLD_SCHEMA_PATH", "./data_contract/schema/gold_venta
 
 
 def validate_schema(dataframe: pd.DataFrame, schema_path: str):
-    """
-    Convierte el DataFrame a registros nativos de Python y los valida
-    contra el contrato JSON correspondiente.
-    """
+    # Convierte el DataFrame a registros nativos de Python y los valida contra el contrato JSON correspondiente
     if not os.path.exists(schema_path):
         pytest.skip(f"El esquema en {schema_path} no fue encontrado.")
 
