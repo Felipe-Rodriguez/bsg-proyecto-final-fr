@@ -37,10 +37,12 @@ El pipeline sigue la **Arquitectura Medallion (Bronze -> Silver -> Gold)**, cons
 5. Ejecutar tests: `make test`
 6. Instalar airflow: `make airflow-install`
 7. Inicializar BD: `make airflow-init`
-8. Crear usuario: airflow users create --username admin --firstname Nombre(s) --lastname Apellido(s) --role Admin --email email@ejemplo.com --password admin123
-9. Iniciar Airflow: `make airflow-run`
-10. Acceder a: `http://localhost:8081/`
-11. Buscar y ejecutar DAG: `walmart_etl_dag`
+8. Activar entorno virtual: `source .venv/bin/activate`
+9. Crear usuario: airflow users create --username admin --firstname Nombre(s) --lastname Apellido(s) --role Admin --email email@ejemplo.com --password admin123
+10. Desactivar entorno virtual: `deactivate`
+11. Iniciar Airflow: `make airflow-run`
+12. Acceder a: `http://localhost:8081/`
+13. Buscar y ejecutar DAG: `walmart_etl_dag`
 
 ## 4. Estructura de Datos
 * **Bronze:** `bronze/walmart_sales/` y `bronze/holidays_api/` (datos raw en Parquet).

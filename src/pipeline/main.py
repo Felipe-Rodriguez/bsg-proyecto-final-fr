@@ -74,14 +74,17 @@ def run_pipeline(mode: str = "hybrid"):
         gcs_loader = GCSLoader()
         bq_loader = BigQueryLoader()
 
+        print(f"\n=====================================================================")
+        print(" -> [Carga Cloud] Inicia la carga a GCS y BigQuery")
+        print(f"=====================================================================")
         gcs_loader.upload_parquet(df_ventas_raw, f"bronze/walmart_sales/event_date={execution_date}/sales_{execution_time}.parquet")
         gcs_loader.upload_parquet(df_holidays_raw, f"bronze/holidays_api/event_date={execution_date}/holidays_{execution_time}.parquet")
         gcs_loader.upload_parquet(df_silver, f"silver/walmart_sales_curated/event_date={execution_date}/sales_curated_{execution_time}.parquet")
         gcs_loader.upload_parquet(df_gold, f"gold/bsg_walmart/event_date={execution_date}/holiday_sales_impact_{execution_time}.parquet")
-        print(f"\n=====================================================================")
+        bq_loader.load_table(df_gold)
+        print(f"=====================================================================")
         print(" -> [Carga Cloud] Datos almacenados exitosamente en GCS y BigQuery")
         print(f"=====================================================================")
-        bq_loader.load_table(df_gold)
         print(f"Etapa de carga (L) completada, se cargó correctamente la tabla holiday_sales_impact con {len(df_gold)} registros.")
 
 if __name__ == "__main__":
