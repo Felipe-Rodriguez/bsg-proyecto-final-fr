@@ -20,7 +20,7 @@ def run_pipeline(mode: str = "hybrid"):
     print(f" INICIANDO PIPELINE ETL - MODO: {mode.upper()}")
     print(f"=========================================")
 
-    # 1. EXTRACCIÓN SEGÚN EL MODO
+    # Etapa de Extracción (E) según el modo deseado
     if mode == "local":
         mongodb_path = os.getenv("INPUT_FILE_PATH_MONGODB", "./data_samples/Walmart.csv")
         api_path = os.getenv("INPUT_FILE_PATH_API", "./data_samples/Holidays.csv")
@@ -46,7 +46,7 @@ def run_pipeline(mode: str = "hybrid"):
         df_holidays_raw = HolidayAPIExtractor().extract_holidays()
         print(f"Etapa de extracción (E) completada, con {len(df_ventas_raw)} registros de ventas y {len(df_holidays_raw)} registros de festividades.")
 
-    # 2. TRANSFORMACIONES MEDALLION (Idénticas para todos los modos)
+    # Etapa de Transformación (T)
     print(f"\n=========================================================")
     print(" -> [Transformación] Procesando capas Silver y Gold...")
     print(f"=========================================================")
@@ -54,7 +54,7 @@ def run_pipeline(mode: str = "hybrid"):
     df_gold = SilverToGoldTransformer().transform(df_silver)
     print(f"Etapa de transformación (T) completada, con {len(df_silver)} registros de la capa silver y {len(df_gold)} registros de la capa gold.")
 
-    # 3. CARGA SEGÚN EL MODO
+    # Etapa de Carga (L) según el modo deseado
     if mode == "local":
         out_dir = os.getenv("OUTPUT_DIR", "./out")
         os.makedirs(f"{out_dir}/bronze", exist_ok=True)
@@ -70,12 +70,12 @@ def run_pipeline(mode: str = "hybrid"):
         print(f"===============================================================")
         print(f"Etapa de carga (L) completada, se cargó correctamente la tabla holiday_sales_impact con {len(df_gold)} registros.")
     else:
-        # hybrid y cloud guardan en GCS y BigQuery
+        # Modos hybrid y cloud guardan en GCS y BigQuery
         gcs_loader = GCSLoader()
         bq_loader = BigQueryLoader()
 
         gcs_loader.upload_parquet(df_ventas_raw, f"bronze/walmart_sales/event_date={execution_date}/sales_{execution_time}.parquet")
-        gcs_loader.upload_parquet(df_holidays_raw, f"bronze/holidays_api/event_date={execution_date}/sales_{execution_time}.parquet")
+        gcs_loader.upload_parquet(df_holidays_raw, f"bronze/holidays_api/event_date={execution_date}/holidays_{execution_time}.parquet")
         gcs_loader.upload_parquet(df_silver, f"silver/walmart_sales_curated/event_date={execution_date}/sales_curated_{execution_time}.parquet")
         bq_loader.load_table(df_gold)
         print(f"\n=====================================================================")
