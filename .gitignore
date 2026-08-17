@@ -2,6 +2,7 @@
 __pycache__/
 *.pyc
 .env
+out/
 *.json
 !data_contract/schema/*.json
 .pytest_cache/
