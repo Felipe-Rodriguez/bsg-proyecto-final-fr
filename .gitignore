@@ -2,7 +2,6 @@
 __pycache__/
 *.pyc
 .env
-data_samples/*.csv
 *.json
 !data_contract/schema/*.json
 .pytest_cache/
