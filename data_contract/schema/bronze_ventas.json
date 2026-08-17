@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BronzeVentasSchema",
+  "type": "object",
+  "required": ["Store", "Date", "Weekly_Sales", "Holiday_Flag", "Temperature", "Fuel_Price", "CPI", "Unemployment"],
+  "properties": {
+    "Store": { "type": ["integer", "string"] },
+    "Date": { "type": "string" },
+    "Weekly_Sales": { "type": ["number", "string"] },
+    "Holiday_Flag": { "type": ["integer", "string"] },
+    "Temperature": { "type": ["number", "string"] },
+    "Fuel_Price": { "type": ["number", "string"] },
+    "CPI": { "type": ["number", "string"] },
+    "Unemployment": { "type": ["number", "string"] },
+    "ingestion_date": { "type": "string" }
+  }
+}

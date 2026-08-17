@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SilverVentasSchema",
+  "type": "object",
+  "required": [
+    "store_id",
+    "event_date",
+    "weekly_sales",
+    "is_holiday",
+    "temperature",
+    "fuel_price",
+    "cpi",
+    "unemployment_rate",
+    "holiday_name"
+  ],
+  "properties": {
+    "store_id": { "type": "integer" },
+    "event_date": { "type": "string", "format": "date" },
+    "weekly_sales": { "type": "number" },
+    "is_holiday": { "type": "boolean" },
+    "temperature": { "type": "number" },
+    "fuel_price": { "type": "number" },
+    "cpi": { "type": "number" },
+    "unemployment_rate": { "type": "number" },
+    "holiday_name": { "type": ["string", "null"] },
+    "ingestion_date": { "type": "string" }
+  }
+}

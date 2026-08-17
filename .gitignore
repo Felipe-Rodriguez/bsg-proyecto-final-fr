@@ -6,3 +6,4 @@ data_samples/*.csv
 *.json
 !data_contract/schema/*.json
 .pytest_cache/
+credentials

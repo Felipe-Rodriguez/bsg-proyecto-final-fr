@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GoldHolidayImpactSchema",
+  "type": "object",
+  "required": [
+    "store_id",
+    "year",
+    "holiday_name",
+    "total_sales",
+    "avg_weekly_sales",
+    "avg_cpi",
+    "avg_unemployment"
+  ],
+  "properties": {
+    "store_id": { "type": "integer" },
+    "year": { "type": "integer" },
+    "holiday_name": { "type": "string" },
+    "total_sales": { "type": "number" },
+    "avg_weekly_sales": { "type": "number" },
+    "avg_cpi": { "type": "number" },
+    "avg_unemployment": { "type": "number" }
+  }
+}
