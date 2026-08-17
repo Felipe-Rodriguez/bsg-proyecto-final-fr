@@ -23,6 +23,7 @@ class HolidayAPIExtractor:
         self.timeout = timeout
         self.session = self._build_session(max_retries)
 
+    # Se tomó el ejemplo de reintentos incrementales del ejercicio en clase
     def _build_session(
             self, 
             max_retries: int
@@ -54,14 +55,10 @@ class HolidayAPIExtractor:
             response.raise_for_status()
             holidays = response.json()
             all_holidays.extend(holidays)
-            # response = requests.get(url, timeout=10)
-            # response.raise_for_status()
-            # holidays = response.json()
-            # all_holidays.extend(holidays)
 
         df = pd.DataFrame(all_holidays)
         
-        # Seleccionar campos relevantes de la API
+        # Solo se tomarán los campos relevantes de la API
         cols_to_keep = ["date", "localName", "name", "fixed", "global", "types"]
         df = df[[c for c in cols_to_keep if c in df.columns]]
         return df
@@ -70,5 +67,5 @@ if __name__ == "__main__":
     extractor = HolidayAPIExtractor()
     df = extractor.extract_holidays()
     print(f"Festividades extraídas: {len(df)}")
-    # Se imprime una pequeña muestra del df
+    # Se imprime una pequeña muestra del df para pruebas
     print(df.head())

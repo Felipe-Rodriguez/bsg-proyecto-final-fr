@@ -30,7 +30,7 @@ class BronzeToSilverTransformer:
         if not df_holidays.empty and "date" in df_holidays.columns:
             df_holidays["date"] = pd.to_datetime(df_holidays["date"]).dt.strftime("%Y-%m-%d")
 
-            # Solo recuperamos la fecha y el nombre de la festividad
+            # Solo se necesita la fecha y el nombre de la festividad para este ejercicio
             df_holidays = df_holidays[["date", "name"]].rename(columns={"date": "event_date", "name": "holiday_name"})
 
             # Eliminación de duplicados de fecha en festividades

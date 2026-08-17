@@ -25,5 +25,5 @@ if __name__ == "__main__":
     extractor = MongoVentasExtractor()
     df = extractor.extract_ventas()
     print(f"Ventas extraídas de MongoDB: {len(df)}")
-    # Se imprime una pequeña muestra del df
+    # Se imprime una pequeña muestra del df para pruebas
     print(df.head())
